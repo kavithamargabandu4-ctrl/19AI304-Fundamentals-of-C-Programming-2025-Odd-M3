@@ -28,7 +28,36 @@ To formulate a C program to convert a decimal number into its binary equivalent 
 ### Step 8: 
    Stop
 # Program:
+#include <stdio.h>
+
+int main() {
+    int decimal, i;
+    int binary[32];
+    scanf("%d", &decimal);
+
+    if (decimal == 0) {
+        printf("0\n");
+        return 0;
+    }
+
+    i = 0;
+    while (decimal > 0) {
+        binary[i] = decimal % 2;
+        decimal = decimal / 2;
+        i++;
+    }
+
+    for (i = i - 1; i >= 0; i--) {
+        printf("%d", binary[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
 # Output:
+![Uploading image.png…]()
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -67,7 +96,53 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9: 
   Stop
 # Program:
+#include <stdio.h>
+
+int main() {
+    int r, c;
+    scanf("%d %d", &r, &c);
+    int A[r][c];
+
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++)
+            scanf("%d", &A[i][j]);
+
+    int found = 0;
+
+    for (int i = 0; i < r; i++) {
+        int rowMin = A[i][0];
+        int colIndex = 0;
+
+        for (int j = 1; j < c; j++) {
+            if (A[i][j] < rowMin) {
+                rowMin = A[i][j];
+                colIndex = j;
+            }
+        }
+
+        int isSaddle = 1;
+        for (int k = 0; k < r; k++) {
+            if (A[k][colIndex] > rowMin) {
+                isSaddle = 0;
+                break;
+            }
+        }
+
+        if (isSaddle) {
+            printf("Saddle point: %d at position (%d, %d)\n", rowMin, i, colIndex);
+            found = 1;
+        }
+    }
+
+    if (!found)
+        printf("No saddle point found\n");
+
+    return 0;
+}
+
 # Output:
+<img width="1126" height="853" alt="image" src="https://github.com/user-attachments/assets/e6537b15-b803-4ede-8bef-89a4765d8b01" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -101,7 +176,29 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10: 
   Stop
 # Program:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100], rev[100];
+    int len, i, j;
+
+    scanf("%[^\n]s", str);
+    len = strlen(str);
+
+    j = 0;
+    for (i = len - 1; i >= 0; i--) {
+        rev[j++] = str[i];
+    }
+    rev[j] = '\0';
+
+    printf("%s\n", rev);
+    return 0;
+}
+
 # Output:
+<img width="1280" height="389" alt="image" src="https://github.com/user-attachments/assets/c4908200-2f8c-4a95-9cc2-3c7e51eb3109" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -135,7 +232,29 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8:
   Stop
 # Program:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100];
+    int freq[256] = {0}, i;
+
+    scanf("%[^\n]s", str);
+
+    for(i = 0; str[i] != '\0'; i++)
+        freq[(int)str[i]]++;
+
+    for(i = 0; i < 256; i++) {
+        if(freq[i] != 0)
+            printf("%c = %d\n", i, freq[i]);
+    }
+
+    return 0;
+}
+
 # Output:
+<img width="1070" height="660" alt="image" src="https://github.com/user-attachments/assets/65e93b77-f6ac-41cc-93ba-75ca647cf10a" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -143,7 +262,6 @@ Thus, the program was implemented and executed successfully, and the required ou
 # 19AI304-Fundamentals-of-C-Programming-2025-Odd-M3
 # IAPR-3- Module 3 - FoC
 # Ex.No:15
-  Formulate a C program to remove duplicate words from a given string and display the string with only unique words.
 # Date : 
 # Aim:
   To formulate a C program to remove duplicate words from a given string and display the string with only unique words.
@@ -169,7 +287,43 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8: 
   Stop
 # Program:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[200], words[50][50], result[200] = "";
+    int i, j, k = 0, count, found;
+
+    scanf(" %[^\n]s", str);
+
+    char *token = strtok(str, " ");
+    while(token != NULL) {
+        found = 0;
+        for(i = 0; i < k; i++) {
+            if(strcmp(words[i], token) == 0) {
+                found = 1;
+                break;
+            }
+        }
+        if(!found) {
+            strcpy(words[k++], token);
+        }
+        token = strtok(NULL, " ");
+    }
+
+    for(i = 0; i < k; i++) {
+        strcat(result, words[i]);
+        if(i < k - 1)
+            strcat(result, " ");
+    }
+
+    printf("%s\n", result);
+    return 0;
+}
+
 # Output:
+<img width="1280" height="168" alt="image" src="https://github.com/user-attachments/assets/e0fa2c59-9b46-4432-ac74-3dc559528095" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
